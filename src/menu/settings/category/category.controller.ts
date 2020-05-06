@@ -28,4 +28,9 @@ export class CategoryController {
         return this.categoryService.delete(id);
     }
 
+    @Delete()
+    deleteMenyItems(@Body() array) {
+        return this.categoryService.delateManyItems(array.ids);
+    }
+
 }

@@ -41,4 +41,15 @@ export class CategoryService {
         await this.categoryRepository.delete({ id });
         return { delete: true };
     }
+
+    async delateManyItems(arrayIds: number[]): Promise<any> {
+        await arrayIds.forEach(id => {
+            const item = this.categoryRepository.findOne({ where: { id } });
+            if (!item) {
+                throw new HttpException(`Not found item by id: ${id}`, HttpStatus.NOT_FOUND);
+            }
+        });
+        await this.categoryRepository.delete(arrayIds);
+        return { delete: true };
+    }
 }
